@@ -1,0 +1,30 @@
+@namespace BlazorGQL.Pages.Product
+@page "/"
+
+
+
+<div>
+    @if (_products == null)
+    {
+        <h3>Loading Products...</h3>
+    }
+    else
+    {
+      <div class="container mb-5 mt-5">
+            <div class="row">
+                @foreach (var product in _products)
+                {
+                     <div class="col-md-4">
+                        <div class="card mt-3">
+                            <div class="product-1 align-items-center p-2 text-center">
+                                <ProductCard Product="product"></ProductCard>
+                            </div>
+                            <div @onclick="() => AddToCart(product)" class="p-3 bg-danger text-center text-white mt-3 cursor showHand"> <span class="text-uppercase">Add to Cart</span> </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+

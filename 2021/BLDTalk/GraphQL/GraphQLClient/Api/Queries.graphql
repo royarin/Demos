@@ -1,0 +1,49 @@
+﻿
+query getOrders {
+  orders {
+   ...orderFields
+  }
+}
+
+
+
+
+fragment orderFields on Order
+{
+    orderNumber
+    deliveryName
+    deliveryAddress1
+    deliveryAddress2
+    deliveryPostCode
+    deliveryCity
+    deliveryCountry
+    lineItems {
+      sku
+      quantity
+    }
+}
+
+query getProducts {
+  products {
+    name
+    sku
+    description
+    color
+    size
+    price
+    image
+    inventory {
+      stock
+    }
+  }
+}
+
+
+mutation addOrder ($input: CreateOrderInput!)
+{
+  createOrder(createOrderInput: $input)
+  {
+    orderNumber
+    deliveryName
+  }
+}

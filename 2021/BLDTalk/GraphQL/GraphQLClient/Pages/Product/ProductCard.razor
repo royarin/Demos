@@ -1,0 +1,17 @@
+﻿<div>
+    <img src="@Product.Image" class="rounded" height="100" width="160">
+    <h5>@Product.Name</h5>
+    <div class="mt-3 info"> <span class="text1 d-block">@Product.Description</span> <span class="text1">@Product.Color Size @Product.Size</span> </div>
+    <div class=" cost mt-3 text-dark">
+        <span>@Product.Price</span>
+    </div>
+    @if (Product.Stock < _stockThresHold)
+    {
+        <div class="oi oi-warning" style="color: red"><span>Low on Stock!</span></div>
+    }
+    else
+    {
+        <div class="oi oi-thumb-up" style="color: green"><span>Enough stock!</span></div>
+    }
+
+</div>
