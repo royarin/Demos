@@ -1,0 +1,14 @@
+GET http://localhost:3510/v1.0/invoke/product-api/method/api/Products
+
+###
+GET http://127.0.0.1:58958/v1.0/invoke/product-api/method/api/products HTTP/1.1
+
+###
+GET http://127.0.0.1:50765/v1.0/invoke/cart-api/method/cart
+
+
+###
+http://127.0.0.1:59630/v1.0/invoke/product-api/method/Products
+
+###
+http://localhost:49273/v1.0/secrets/local-secrets/apiKey

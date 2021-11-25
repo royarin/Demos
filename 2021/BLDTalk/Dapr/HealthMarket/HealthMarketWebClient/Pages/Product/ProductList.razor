@@ -1,0 +1,48 @@
+@page "/"
+
+@inject IProductService _productService;
+@inject ICartService _cartService;
+
+<div>
+    @if (_products == null)
+    {
+        <h3>Loading Products...</h3>
+    }
+    else
+    {
+        <div class="container mb-5 mt-5">
+            <div class="row">
+                @foreach (var product in _products)
+                {
+                    <div class="col-md-4">
+                        <div class="card mt-3">
+                            <div class="product-1 align-items-center p-2 text-center">
+                                <ProductCard Product="product"></ProductCard>
+                            </div>
+                            <div @onclick="() => AddToCart(product)"
+                                class="p-3 bg-danger text-center text-white mt-3 cursor showHand"> <span
+                                class="text-uppercase">Add to Cart</span> </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+
+    private IEnumerable<Product> _products;
+    protected override async Task OnInitializedAsync()
+    {
+        // Workaround for https://github.com/dotnet/aspnetcore/issues/29846
+        Activity.Current = null;
+        _products = await _productService.GetProducts();
+    }
+
+    private async Task AddToCart(Product product){
+        // Workaround for https://github.com/dotnet/aspnetcore/issues/29846
+        Activity.Current = null;
+        await _cartService.AddToCart(product);
+    } 
+}

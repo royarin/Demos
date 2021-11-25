@@ -1,0 +1,11 @@
+@host=https://localhost:5011
+
+
+### Get All Products
+GET  {{host}}/api/products
+Accept: application/json
+
+
+### Get Product By SKU
+GET {{host}}/api/products/3
+Accept: application/json

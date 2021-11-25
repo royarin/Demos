@@ -1,0 +1,42 @@
+@namespace HealthMarketWebClient.Pages.Order
+
+@page "/orderlist"
+
+@*<h1><span class="oi oi-cart"></span> Orders</h1>*@
+
+<div>
+    @* @if (_orders == null)
+    {
+        <h3>Loading Orders...</h3>
+    }
+    else
+    {
+
+        <TableComponent Items="_orders" Context="item">
+            <TableHeader>
+
+            </TableHeader>
+            <RowTemplate>
+
+                <td>
+                    <div><h3>@item.OrderNumber - @item.DeliveryName</h3></div>
+                </td>
+                <td>
+                    <div>
+                        <div><h5>@item.DeliveryAddress1</h5></div>
+                        <div><h5>@item.DeliveryPostCode @item.DeliveryCity</h5></div>
+                        <div><h5>@item.DeliveryCountry</h5></div>
+                    </div>
+                </td>
+                <td>
+                    @foreach (var item in item.LineItems)
+                        {
+                        <p class="card-text">SKU: @item.Product.SKU Quantity: @item.Quantity</p>
+                        }
+                </td>
+            </RowTemplate>
+        </TableComponent>
+    } *@
+    <h2>Your Orders would appear here</h2>
+</div>
+

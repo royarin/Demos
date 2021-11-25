@@ -1,0 +1,54 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: healthmarket
+namespace: default
+extensions:
+  - name: dapr
+    components-path: "./components/local/"
+    config: 'myconfig'
+  - name: zipkin
+services:
+- name: product-api
+  project: ProductAPI/ProductAPI.csproj
+  bindings:
+    - port: 5010
+- name: cart-api
+  project: CartAPI/CartAPI.csproj
+  bindings:
+    - port: 5020
+- name: order-api
+  project: OrderAPI/OrderAPI.csproj
+  bindings:
+    - port: 5030
+- name: notification-api
+  project: NotificationAPI/NotificationAPI.csproj
+  bindings:
+    - port: 5090   
+- name: webclient
+  project: HealthMarketWebClient/HealthMarketWebClient.csproj
+  bindings:
+    - port: 5000
+- name: mongodb
+  image: mongo
+  bindings:
+    - port: 27017
+  env:
+    - name: MONGO_INITDB_ROOT_USERNAME
+      value: admin
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      value: admin
+    - name: MONGO_INITDB_DATABASE
+      value: HealthMarket
+  volumes:
+    - source: ./productdata/products.json
+      target : /data/products.json
+    - source: ./productdata/SeedProducts.sh
+      target : /docker-entrypoint-initdb.d/populate.sh
+- name: redis
+  image: redis
+  bindings:
+    - port: 6379     

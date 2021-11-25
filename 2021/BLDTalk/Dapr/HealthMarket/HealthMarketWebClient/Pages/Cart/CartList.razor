@@ -1,0 +1,84 @@
+@namespace HealthMarketWebClient.Pages.Cart
+@page "/cartlist"
+
+
+
+<form>
+    <EditForm Model="@_orderModel" OnValidSubmit="@CreateOrder">
+        <DataAnnotationsValidator />
+        <h1><span class="oi oi-cart"></span> Your Cart</h1>
+
+        <div>
+            @if (_items == null || _items.Count == 0)
+            {
+                <h3>No items found in the cart...</h3>
+            }
+            else
+            {
+                <button style="float:right; margin-bottom: 10px" type="submit" class="btn btn-primary">Create Order</button>
+                <TableComponent Items="_items" Context="item">
+                    <TableHeader>
+                    </TableHeader>
+                    <RowTemplate>
+                        <td><img src="/images/@item.Product.Filename" style="max-height: 50px; max-width: 50px" /></td>
+                        <td>
+                            <div>
+                                <h5>@item.Product.Title</h5>
+                            </div>
+                            <div class="text1">@item.Product.Description</div>
+                        </td>
+                        <td>
+                            <label style="float:left; margin-right: 25px">Quantity</label>
+                            <div>@item.Quantity</div>
+                        </td>
+                        <td>
+                            <div class="text-dark">
+                                <h2>@item.TotalPrice.ToString("c2")</h2>
+                            </div>
+                        </td>
+                    </RowTemplate>
+                </TableComponent>
+            }
+        </div>
+
+        @if (_items != null && _items.Count > 0)
+        {
+
+            <div class="card" style="width: 25rem; margin: auto">
+                <div class="card-body">
+                    <h5 class="card-title">Delivery Address</h5>
+
+
+                    <div class="form-group">
+                        <label>Delivery Name</label>
+                        <InputText class="form-control" @bind-Value="_orderModel.DeliveryName" />
+                        <ValidationMessage For="@(() => _orderModel.DeliveryName)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Address</label>
+                        <InputText class="form-control" @bind-Value="_orderModel.DeliveryAddress1" />
+                        <ValidationMessage For="@(() => _orderModel.DeliveryAddress1)" />
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label>Delivery PostCode</label>
+                            <InputText class="form-control" @bind-Value="_orderModel.DeliveryPostCode" />
+                            <ValidationMessage For="@(() => _orderModel.DeliveryPostCode)" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Delivery City</label>
+                            <InputText class="form-control" @bind-Value="_orderModel.DeliveryCity" />
+                            <ValidationMessage For="@(() => _orderModel.DeliveryCity)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Country</label>
+                        <InputText class="form-control" @bind-Value="_orderModel.DeliveryCountry" />
+                        <ValidationMessage For="@(() => _orderModel.DeliveryCountry)" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </EditForm>
+</form>

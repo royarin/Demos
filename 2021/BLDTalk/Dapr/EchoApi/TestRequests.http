@@ -1,0 +1,10 @@
+### Request dotnet run
+http://localhost:5220/?name=BLD
+
+
+### Request DAPR EndPoint
+GET http://localhost:3500/?name=DAPR
+dapr-app-id: Echo
+
+# Call DAPR sidecar invoke endpoint using well defined format
+# curl http://localhost:3500/v1.0/invoke/Echo/method/?name="World"
