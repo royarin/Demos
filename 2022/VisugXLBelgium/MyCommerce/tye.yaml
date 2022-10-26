@@ -1,0 +1,28 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: mycommerce
+services:
+- name: product-api
+  project: ProductAPI/ProductAPI.csproj
+  bindings:
+    - port: 5010
+      protocol: https
+- name: order-api
+  project: OrderAPI/OrderAPI.csproj
+  bindings:
+    - port: 5020
+      protocol: https
+- name: inventory-api
+  project: InventoryAPI/InventoryAPI.csproj
+  bindings:
+    - port: 5030
+      protocol: https
+- name: gateway
+  project: Gateway/Gateway.csproj
+  bindings:
+    - port: 5000
+      protocol: https
