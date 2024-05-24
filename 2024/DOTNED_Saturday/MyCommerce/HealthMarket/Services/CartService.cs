@@ -37,11 +37,5 @@ namespace HealthMarket.Services
             await _httpClient.PostAsJsonAsync("cart/clear", new Product());
             OnChange?.Invoke();
         }
-
-        public async Task RemoveFromCart(LineItem lineItem)
-        {
-            await _httpClient.PostAsJsonAsync("cart/remove", lineItem);
-            OnChange?.Invoke();
-        }
     }
 }
