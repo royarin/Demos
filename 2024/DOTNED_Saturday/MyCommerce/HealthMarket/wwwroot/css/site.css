@@ -66,3 +66,8 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+    .card-img-top {
+        height: 200px;  /* Adjust as needed */
+        object-fit: cover;  /* This will scale the image to fit the height and width while maintaining the aspect ratio */
+    }

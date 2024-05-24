@@ -6,7 +6,6 @@ namespace HealthMarket.Services
 {
     public class CartService : ICartService
     {
-        public event Action OnChange;
         private readonly HttpClient _httpClient = null!;
 
         public CartService(IHttpClientFactory httpClientFactory)
@@ -17,7 +16,6 @@ namespace HealthMarket.Services
         public async Task AddToCart(Product product)
         {
             await _httpClient.PostAsJsonAsync("cart/add", product);
-            OnChange?.Invoke();
         }
 
         public async Task<Cart> GetCart()
@@ -35,7 +33,6 @@ namespace HealthMarket.Services
         public async Task ClearCart()
         {
             await _httpClient.PostAsJsonAsync("cart/clear", new Product());
-            OnChange?.Invoke();
         }
     }
 }
