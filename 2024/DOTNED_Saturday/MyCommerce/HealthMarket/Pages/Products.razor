@@ -1,0 +1,42 @@
+@page "/"
+@inject HealthMarket.Services.IProductService ProductService
+@inject HealthMarket.Services.ICartService CartService
+
+<h3>Products</h3>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var product in products)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/images/@product.Filename" alt="@product.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Description</p>
+                        <button @onclick="() => AddToCart(product)" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private IEnumerable<HealthMarket.Data.Product>? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetProducts();
+    }
+
+    private async Task AddToCart(HealthMarket.Data.Product product)
+    {
+        await CartService.AddToCart(product);
+    }
+}
