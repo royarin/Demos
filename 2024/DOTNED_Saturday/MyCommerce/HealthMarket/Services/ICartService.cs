@@ -8,6 +8,5 @@ namespace HealthMarket.Services
         public Task AddToCart(Product product);
         public Task<Cart> GetCart();
         public Task ClearCart();
-        public Task RemoveFromCart(LineItem lineItem);
     }
 }
