@@ -10,7 +10,7 @@
         public string Filename { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public int Rating { get; set; }
     }
 }
