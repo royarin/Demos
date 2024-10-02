@@ -31,11 +31,5 @@ namespace CartAPI.Controllers
             await _cartService.ClearCart();
             return Ok();
         }
-
-        [HttpPost("cart/remove")]
-        public async Task<IActionResult> RemoveFromCart(LineItem lineItem){
-            await _cartService.RemoveFromCart(lineItem);
-            return Ok();
-        }
     }
 }
