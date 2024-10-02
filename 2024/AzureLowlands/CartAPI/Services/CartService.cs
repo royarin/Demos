@@ -44,5 +44,23 @@ namespace CartAPI.Services{
         public async Task ClearCart(){
             await _redisDatabase.KeyDeleteAsync("cart");
         }
+
+        public async Task RemoveFromCart(Product product){
+            var cartValue = await _redisDatabase.StringGetAsync("cart");
+            var cartJson = cartValue.ToString();
+            var cart = JsonConvert.DeserializeObject<Cart>(cartJson) ?? new Cart();
+
+            var existingItem = cart.LineItems.FirstOrDefault(i => i.Product.Id == product.Id);
+
+            if (existingItem != null){
+                existingItem.Quantity -= 1;
+                if (existingItem.Quantity <= 0){
+                    cart.LineItems.Remove(existingItem);
+                }
+            }
+
+            var serializedCart = JsonConvert.SerializeObject(cart);
+            await _redisDatabase.StringSetAsync("cart", serializedCart);
+        }
     }
 }

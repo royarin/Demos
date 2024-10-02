@@ -7,5 +7,6 @@ namespace CartAPI.Services
         Task AddToCart(Product product);
         Task<Cart> GetCart();
         Task ClearCart();
+        Task RemoveFromCart(Product product);
     }
 }
