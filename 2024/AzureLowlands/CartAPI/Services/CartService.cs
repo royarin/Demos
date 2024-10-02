@@ -44,31 +44,5 @@ namespace CartAPI.Services{
         public async Task ClearCart(){
             await _redisDatabase.KeyDeleteAsync("cart");
         }
-
-        // create a method to remove a lineitem from the cart
-        // decrease quantity if item already exists
-        // remove lineitem if quantity is 0
-        public async Task RemoveFromCart(LineItem lineItem){
-            var cartValue = await _redisDatabase.StringGetAsync("cart");
-            var cartJson = cartValue.ToString();
-            var cart = JsonConvert.DeserializeObject<Cart>(cartJson) ?? new Cart();
-
-            cart.LineItems ??= new List<LineItem>();
-
-            var existingItem = cart.LineItems.FirstOrDefault(i => i.Product.Id == lineItem.Product.Id);
-
-            if (existingItem == null){
-                return;
-            }
-            else{
-                existingItem.Quantity -= 1;
-                if (existingItem.Quantity == 0){
-                    cart.LineItems.Remove(existingItem);
-                }
-            }
-
-            var serializedCart = JsonConvert.SerializeObject(cart);
-            await _redisDatabase.StringSetAsync("cart", serializedCart);
-        }
     }
 }
